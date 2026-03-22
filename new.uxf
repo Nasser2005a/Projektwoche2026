@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>216</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Form1
+--
+- controller: WorkshopController
+--
++ BtnAnzeigen_Click()
++ BtnHinzufuegen_Click()
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>216</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>WorkshopController
+--
+- model: WorkshopModel
+--
++ LadeTitel(): List&lt;Workshop&gt;
++ NeuerWorkshop(titel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>576</x>
+      <y>216</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>WorkshopModel
+--
+- connStr: string
+--
++ GetTitel(): List&lt;Workshop&gt;
++ AddWorkshop(titel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>216</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Workshop
+--
+- WorkshopID: int
+- Titel: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>248</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>240</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>240</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

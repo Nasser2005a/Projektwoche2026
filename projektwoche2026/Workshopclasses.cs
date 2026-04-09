@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace Projektwoche2026
@@ -17,34 +18,53 @@ namespace Projektwoche2026
         public List<Workshop> GetTitel()
         {
             List<Workshop> liste = new List<Workshop>();
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            try
             {
-                MySqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT workshopID, titel FROM workshop";
-                conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
-                    while (reader.Read())
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = "SELECT workshopID, titel FROM workshop";
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Workshop w = new Workshop();
-                        w.WorkshopID = Convert.ToInt32(reader["workshopID"]);
-                        w.Titel = reader["titel"].ToString();
-                        liste.Add(w);
+                        while (reader.Read())
+                        {
+                            Workshop w = new Workshop();
+                            w.WorkshopID = Convert.ToInt32(reader["workshopID"]);
+                            w.Titel = reader["titel"].ToString();
+                            liste.Add(w);
+                        }
                     }
                 }
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Es konnte keine Verbindung zur Datenbank hergestellt werden. Bitte überprüfe ob der Server erreichbar ist.");
             }
             return liste;
         }
 
         public void AddWorkshop(string titel)
         {
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            if (titel.Length > 255)
             {
-                MySqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO workshop (titel) VALUES (@titel)";
-                cmd.Parameters.AddWithValue("@titel", titel);
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                MessageBox.Show("Der Titel ist zu lang. Bitte maximal 255 Zeichen eingeben.");
+                return;
+            }
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = "INSERT INTO workshop (titel) VALUES (@titel)";
+                    cmd.Parameters.AddWithValue("@titel", titel);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Es konnte keine Verbindung zur Datenbank hergestellt werden. Bitte überprüfe ob der Server erreichbar ist.");
             }
         }
     }
